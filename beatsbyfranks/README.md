@@ -66,3 +66,8 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `yarn build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+### TODO LIST
+
+-Figure out how to configure dotenv stripe tokenon vc page
+-Create a Success and acancel order page redirect after stripe
