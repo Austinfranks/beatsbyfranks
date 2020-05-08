@@ -3,58 +3,39 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+import { FaMusic, FaShoppingCart, FaEnvelope } from "react-icons/fa";
+
 import { CartContext } from "../components/cart/context";
 
 const Styles = styled.div`
-  header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  nav {
     height: 10vh;
-    padding-left: 5%;
-    padding-right: 5%;
+    display: flex;
+    flex-direction: row;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    transition: 1s ease;
   }
 
-  h1 {
-    letter-spacing: 2px;
-  }
-
-  header,
-  a {
-    font-family: "Bebas Neue", cursive;
-    font-size: 1.5em;
-  }
-
-  nav,
-  a {
-    display: inline-block;
-    padding: 0px 10px;
+  .link {
     text-decoration: none;
-    font-family: "Alegreya SC", serif;
-    font-style: italic;
-
+    font-size: 2.5em;
     color: #999;
   }
 
-  nav .animation {
+  #link1 {
+    letter-spacing: 0.2em;
   }
 
-  a:nth-child(1) {
-  }
-
-  @media only screen and (max-width: 490px) {
-    h1 {
-      font-size: 1.3em;
-    }
-
-    a {
-      font-size: 1.1em;
-      padding: 0px 5px;
+  @media only screen and (max-width: 500px) {
+    .link {
+      font-size: 2.2em;
     }
   }
 
   .link:hover {
-    color: skyblue;
+    color: black;
 
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
@@ -67,22 +48,15 @@ export default function Navigation() {
   const numItems = cartCtx.items.length;
   return (
     <Styles>
-      <header>
-        <h1>BEATSBYFRANKS</h1>
-        <nav>
-          <Link className="link" to="/">
-            Home
-          </Link>
-          <Link className="link" to="/cart">
-            Cart({numItems})
-          </Link>
-          <Link className="link" to="/contact">
-            Contact
-          </Link>
-
-          <div className="animation start-home"></div>
-        </nav>
-      </header>
+      <nav>
+        <Link className="link" id="link1" to="/">
+          BEATSBYFRANKS
+        </Link>
+        <Link className="link" id="link2" to="/cart">
+          <FaShoppingCart />
+          {numItems}
+        </Link>
+      </nav>
     </Styles>
   );
 }

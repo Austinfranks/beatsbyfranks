@@ -23,33 +23,28 @@ const Styles = styled.div`
     padding-top: 10px;
   }
 
-  .mainbox {
-    font-size: 2.4em;
-    text-align: center;
-    display: grid;
-    grid-template-rows: auto auto auto;
-    justify-content: stretch;
-    justify-items: stretch;
-  }
-  .subbox {
-    display: grid;
-    grid-template-columns: 25% 25% 25% 25%;
-    align-items: center;
-    justify-items: center;
-    padding: 10px;
+  .mainbox2 {
+    display: flex;
+    flex-direction: column;
+    flex-flow: column wrap;
+    font-size: 2em;
+    transition: 1s ease;
   }
 
-  .subbox:hover .name {
-    color: white;
+  .header {
+    font-weight: bold;
   }
 
-  .subbox:hover {
-    background-color: black;
-    border-radius: 10px;
-    padding-bottom: 20px;
+  .body {
+    display: flex;
+    flex-direction: column;
+    flex-flow: column wrap;
+    justify-content: space-evenly;
+  }
 
-    -webkit-transition-duration: 0.4s;
-    transition-duration: 0.4s;
+  .row {
+    display: flex;
+    justify-content: space-evenly;
   }
 `;
 
@@ -88,42 +83,37 @@ export default function Cart({ stripeToken }) {
   }
   return (
     <Styles>
-      <div className="mainbox">
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Image</th>
-              <th>Price</th>
-            </tr>
-          </thead>
+      <div className="mainbox2">
+        <div className="row header">
+          <div>Cart</div>
+        </div>
+        <div className="body">
+          {ctx.items.map((item) => (
+            <div className="row">
+              <div>
+                {" "}
+                <img
+                  src={`/images/${item.sku}.jpg`}
+                  alt={item.name}
+                  width={50}
+                  height={50}
+                />
+              </div>
+              <div>{item.name}</div>
 
-          <tbody>
-            {ctx.items.map((item) => (
-              <tr>
-                <td>{item.name}</td>
-                <td>
-                  <img
-                    src={`/images/${item.sku}.jpg`}
-                    alt={item.name}
-                    width={50}
-                    height={50}
-                  />
-                </td>
-                <td>{formatPrice(item.price)}</td>
-              </tr>
-            ))}
-            <tr>
-              <td colspan={2}>Total:</td>
-              <td>{formatPrice(totalPrice(ctx.items))}</td>
-            </tr>
-            <tr>
-              <td colspan={3} style={{ textAlign: "right" }}>
-                <button onClick={checkout}>Check Out</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+              <div>{formatPrice(item.price)}</div>
+            </div>
+          ))}
+
+          <div className="row">
+            <div>Total:</div>
+
+            <div>{formatPrice(totalPrice(ctx.items))}</div>
+            <div>
+              <button onClick={checkout}>Check Out</button>
+            </div>
+          </div>
+        </div>
       </div>
     </Styles>
   );
